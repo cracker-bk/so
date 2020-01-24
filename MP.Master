@@ -1,0 +1,277 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MP.Master.cs" Inherits="WebUI.Site1" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script>
+        function ksd() {
+            $('.register_li_display,.login_li_display').show();
+            $('.diy_select').css('display', 'none');
+        }
+    </script>
+    <%-- 母版页登录注册处变化-开始 --%>
+    <!-- js引用包 -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        a,
+        img {
+            border: 0;
+        }
+        /* diy_select */
+
+        .diy_select {
+            min-width: 144px;
+            *width: 144px;
+            height: 50px;
+            margin-right: 5px;
+            position: relative;
+            color: #000;
+            float: left;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .diy_select_btn,
+        .diy_select_txt {
+            float: left;
+            height: 100%;
+            line-height: 50px;
+        }
+
+        .diy_select_list {
+            border: 1px solid #DFDFDF;
+        }
+
+        .select-text {
+            padding-left: 20px;
+            padding-right: 25px;
+            height: 100%;
+            width: 100%;
+        }
+
+        .diy_select_txt {
+            width: 60%;
+        }
+
+        .diy_select_txt,
+        .diy_select_list li {
+            text-indent: 10px;
+            overflow: hidden;
+        }
+
+        .diy_select_btn {
+            width: 20%;
+            background: url(../images/select_log.png) no-repeat center;
+        }
+
+        .select-option {
+            width: 100%;
+        }
+
+        .diy_select_list {
+            height: 300px;
+            position: absolute;
+            top: 51px;
+            left: -1px;
+            z-index: 88888;
+            border-top: none;
+            width: 100%;
+            display: none;
+            background: #fff;
+            overflow: hidden;
+        }
+
+            .diy_select_list li {
+                margin: 0 20px;
+                list-style: none;
+                height: 50px;
+                line-height: 50px;
+                cursor: default;
+                background: #fff;
+                border-bottom: 1px solid #b3b3b3;
+            }
+
+                .diy_select_list li.focus {
+                    margin: 0;
+                    padding: 0 20px;
+                    cursor: pointer;
+                    background: #3399FF;
+                    color: #fff
+                }
+
+        .diy_select_txt {
+            text-align: center;
+        }
+
+        .img1234 {
+            margin: 9px 0px;
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+            border-radius: 50%;
+        }
+    </style>
+    <%-- 母版页登录注册处变化-结束 --%>
+    <link href="content/reset.css" rel="stylesheet" />
+    <link href="content/site1.css" rel="stylesheet" />
+    <script src="js/jquery-3.4.1.js"></script>
+    <%-- 弹窗开始 --%>
+    <link rel="stylesheet" type="text/css" href="tanForm/css/xcConfirm.css" />
+    <script src="tanForm/js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="tanForm/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        function lianX(obj) {
+            switch (obj) {
+                case "tishiInfo":
+                    var txt = "本网站由甜橙众筹信息技术科技有限公司开发，如发现bug或疑惑请联系--18273403759(何先生)";
+                    var option = {
+                        title: "联系我们",
+                        btn: parseInt("0011", 2),
+                        onOk: function () {
+                            console.log("确认啦");
+                        }
+                    }
+                    window.wxc.xcConfirm(txt, "custom", option);
+                    break;
+            }
+        }
+    </script>
+    <%-- 弹窗结束 --%>
+    <style type="text/css">
+        .logo_img {
+            width: 151px;
+            /*height: 35px;*/
+            padding: 5px 0px;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <header id="header">
+                <ul class="header_ul">
+                    <li class="header_first_li left_li">
+                        <img class="logo_img" src="images/logo2.png" /></li>
+                    <li class="header_second_li left_li"><a href="index.aspx" class="header_a bbClick sy">首页</a></li>
+                    <li class="left_li"><a href="list.aspx" class="header_a ll">浏览项目</a></li>
+                    <li class="left_li"><a href='update_project.aspx?id=<%=Request.QueryString["id"]%>' class="header_a fqxm_a">发起项目</a></li>
+<%--                    <li class="left_li"><a href="#" class="header_a">新手指南</a></li>--%>
+                    <li class="left_li"><a href="javascript:lianX('tishiInfo')" class="header_a">联系我们</a></li>
+                    <li class="left_li" style="width: 240px">
+                        <asp:TextBox ID="txtSearch" runat="server" placeholder="请输入" Font-Size="14px" Width="219px" Height="24px" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
+                        <asp:ImageButton ID="ImgbtnSearch" runat="server" Height="28px" ImageUrl="~/images/搜索(1).png" Width="28px" OnClick="ImgbtnSearch_Click" />
+                    </li>
+                    <li class="right_li register_li_display"><a href="Rigister.aspx" class="header_a">注册</a></li>
+                    <li class="right_li shuX login_li_display"><a href="Login.aspx" class="header_a">登录</a></li>
+                    <%-- 图片显示开始 --%>
+                    <div class='diy_select' style="display: none; position: absolute; right: 10px;height:50px">
+
+                        <div class="select-text">
+
+                            <input type='hidden' name='' id="b" class='diy_select_input' />
+
+                            <div class='diy_select_txt'>
+                                  <img id="txImg" runat="server" src="images/用户.png" class="img1234" />
+                            </div>
+                            
+                            <div class='diy_select_btn'></div>
+
+                        </div>
+
+                        <ul class='diy_select_list'>
+
+                            <li><a href='lft_project.aspx?id=<%=Request.QueryString["id"] %>'>支持的项目</a></li>
+
+                            <li><a href='lft_project.aspx?id=<%=Request.QueryString["id"] %>'>发起的项目</a></li>
+
+                            <li><a href='lft_project.aspx?id=<%=Request.QueryString["id"] %>'>我的支持人</a></li>
+                            <li><a href='myself.aspx?id=<%=Request.QueryString["id"] %>' onclick="ff()">个人设置</a></li>
+                            <li><a onclick="ksd()" runat="server" onserverclick="Unnamed_ServerClick">退出</a></li>
+                        </ul>
+                    </div>
+                    <script src="js/demo.js"></script>
+                    <%-- 图片显示结束 --%>
+                    <%-- 导航栏样式开始 --%>
+                    <script>
+                        $(function () {
+                            $(".header_ul a").click(function () {
+                                $(".header_ul a").removeClass("bbClick");
+                                $(this).addClass("bbClick");
+                                $(".header_ul a:not(.bbClick)").addClass("aaClick");
+                            });
+                        })
+                    </script>
+                    <style>
+                        .header_ul a {
+                            display: block;
+                        }
+
+                        .header_ul li:hover .header_a {
+                            background-color: wheat;
+                        }
+
+                        .aaClick {
+                            background-color: white;
+                        }
+
+                        .bbClick {
+                            background-color: wheat;
+                        }
+                    </style>
+                    <%-- 导航栏样式结束 --%>
+                </ul>
+            </header>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <footer id="footer">
+                <div id="footer__wrap--ul">
+                    <ul class="f_ul">
+                        <li class="footer_f">网站声明</li>
+                        <li class="ff footer_s"><a href="MP_ul11.aspx">网站版权</a></li>
+                        <li class="ff"><a href="MP_ul12.aspx">用户信用协议</a></li>
+                        <li class="ff"><a href="MP_ul13.aspx">用户隐私协议</a></li>
+                        <li class="ff"><a href="https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%B3%95/16843044?fr=aladdin">国家网站安全法</a></li>
+                    </ul>
+                    <ul class="f_ul">
+                        <li class="footer_f">关于我们</li>
+                        <li class="ff footer_s"><a href="MP_ul21.aspx">制作团队</a></li>
+                        <li class="ff"><a href="MP_ul22.aspx">后援团队</a></li>
+                    </ul>
+                    <ul class="f_ul">
+                        <li class="footer_f">技术支持</li>
+                        <li class="ff footer_s"><a href="MP_ul31.aspx">项目制作指导</a></li>
+                        <li class="ff"><a href="MP_ul32.aspx">项目运营指导</a></li>
+                    </ul>
+                    <ul class="end_ul" style="width: 133px;float:right;margin-top:60px">
+                        <li><a href="http://www.chinacharityfederation.org/" class="a_clj">
+                            <img src="images/f1logo.png"  style="width:33px;height:33px"/><span style="position:relative;top:-12px">中华慈善总会</span></a></li>
+                        <li><a href="http://www.cfpa.org.cn/" class="a_clj">
+                            <img src="images/f2index_logo.png" /></a></li>
+                        <li><a href="https://www.trjcn.com/" class="a_clj">
+                            <img src="images/logo-w1200.png" /></a></li>
+                        <li><a href="http://www.cxcyds.com/" class="a_clj">
+                            <img src="images/f4logo.png" /></a></li>
+                        <li><a class="a_clj" href="https://www.yirendai.com/mkt/pc/47-317.html?siteId=1010&utm_medium=baidu-1&utm_source=bd-pc-ss&utm_campaign=%B4%FB%BF%EE-%CD%A8%D3%C3%B4%CA&utm_content=%B4%FB%BF%EE-%BD%E8%BF%EE%C6%BD%CC%A8-%D2%C9%CE%CA&utm_term=%D3%D0%C4%C4%D0%A9%D6%DA%B3%EF%BD%E8%BF%EE%C6%BD%CC%A8&utm_cparameters=baiduPC03&bd_vid=8193156979617900084">
+                            <img src="images/2019-05-28-2b9b2867-93ea-4a32-b59f-980330aaf930.png" /></a></li>
+                    </ul>
+                </div>
+            </footer>
+            <div id="end_div">
+                <p>©2019年高软三班科技有限公司zhongchou.com版权所有&nbsp;|&nbsp;1000湘ICP备999号</p>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
